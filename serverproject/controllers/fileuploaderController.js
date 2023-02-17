@@ -66,9 +66,19 @@ const fileSizeFormatter = (bytes, decimal) => {
 
 }
 
+ const deletePhoto = async (req,res)=>{
+    try {
+        const photo = await SingleFile.findByIdAndDelete(req.params.id);
+        res.status(200).json(photo)
+    } catch (error) {
+        return res.status(500).json({ msg: err.message });
+    }
+}
+
 module.exports = {
     singleFileUpload,
     multipleFileUpload,
     getallSingleFiles,
-    getallMultipleFiles
+    getallMultipleFiles,
+    deletePhoto
 }
